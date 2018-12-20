@@ -1,7 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace UniRx.Triggers {
-	public static partial class ObservableTriggerExtensions {
+	public static partial class ObservableTriggerExtensions 
+	{
+        // Util.
+        static T GetOrAddComponent<T>(GameObject gameObject)
+            where T : Component
+        {
+            var component = gameObject.GetComponent<T>();
+            if (component == null)
+            {
+                component = gameObject.AddComponent<T>();
+            }
+
+            return component;
+        }
+
 		public static IObservable<string> OnSubmitAsObservable(this UIInput input) {
 			if(input == null) return Observable.Empty<string>();
 			return GetOrAddComponent<ObservableUIInputTrigger>(input.gameObject).OnSubmitAsObservable(input);

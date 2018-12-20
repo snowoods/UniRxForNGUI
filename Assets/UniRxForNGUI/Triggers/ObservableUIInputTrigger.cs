@@ -1,4 +1,7 @@
-﻿namespace UniRx.Triggers {
+﻿using System;
+
+namespace UniRx.Triggers {
+
 	public class ObservableUIInputTrigger :  ObservableTriggerBase {
 		Subject<string> onChange;
 		Subject<string> onSubmit;
